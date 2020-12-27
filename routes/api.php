@@ -25,8 +25,8 @@ Route::get('category/edit/{id}','App\Http\Controllers\Api\CategoryController@edi
 Route::put('category/update/{id}','App\Http\Controllers\Api\CategoryController@update');
 
 
-Route::get('post','Api\PostController@index');
-Route::post('post/store','Api\PostController@store');
-Route::delete('post/delete/{id}','Api\PostController@destroy');
-Route::get('post/edit/{id}','Api\PostController@edit');
-Route::put('post/update/{id}','Api\PostController@update');
+Route::get('product','App\Http\Controllers\Api\ProductController@index');
+Route::post('product/store','App\Http\Controllers\Api\ProductController@store');
+Route::delete('product/delete/{id}','App\Http\Controllers\Api\ProductController@destroy');
+Route::get('product/edit/{id}','App\Http\Controllers\Api\ProductController@edit');
+Route::put('product/update/{id}','App\Http\Controllers\Api\ProductController@update');
