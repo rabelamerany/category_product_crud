@@ -3,7 +3,7 @@ import axios from 'axios';
 import SuccessAlert from '../SuccessAlert';
 import ErrorAlert from '../ErrorAlert';
 
-export default class IndexCategory extends Component {
+export default class AddCategory extends Component {
 
     constructor() {
         super();

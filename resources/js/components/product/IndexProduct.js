@@ -5,7 +5,7 @@ import Add from "./AddProduct";
 import Listing from "./ListingProduct";
 import Edit from "./EditProduct"
 
-export default class IndexCategory extends Component {
+export default class IndexProduct extends Component {
     render() {
         return (
             <div>

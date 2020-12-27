@@ -5,7 +5,7 @@ import Pagination from "react-js-pagination";
 import SuccessAlert from '../SuccessAlert';
 import ErrorAlert from '../ErrorAlert';
 
-export default class IndexCategory extends Component {
+export default class ListingCategory extends Component {
 
     constructor() {
         super();
