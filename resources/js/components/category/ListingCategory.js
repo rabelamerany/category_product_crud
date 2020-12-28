@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import SuccessAlert from '../SuccessAlert';
 import ErrorAlert from '../ErrorAlert';
+import { format } from 'date-fns';
 
 export default class ListingCategory extends Component {
 
@@ -78,10 +79,10 @@ export default class ListingCategory extends Component {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nom catégorie</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Parent</th>
+                            <th scope="col">Créé à</th>
+                            <th scope="col">Mis à jour à</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -90,11 +91,11 @@ export default class ListingCategory extends Component {
                             this.state.categories.map(category => {
                                 return (
                                     <tr key={category.id}>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{category.id}</th>
                                         <td>{category.name}</td>
-                                        <td>{category.active == 1 ? ("Active") : ("InActive")}</td>
-                                        <td>{category.created_at}</td>
-                                        <td>{category.updated_at}</td>
+                                        <td>*</td>
+                                        <td>{format(new Date(category.created_at), 'yyyy/MM/dd kk:mm:ss')}</td>
+                                        <td>{format(new Date(category.updated_at), 'yyyy/MM/dd kk:mm:ss')}</td>
                                         <td>
                                             <Link to={`/category/edit/${category.id}`} className="btn btn-primary">Edit</Link> &nbsp;
                                             <a href="#" onClick={this.onDelete.bind(this, category.id)} className="btn btn-danger">Delete</a>

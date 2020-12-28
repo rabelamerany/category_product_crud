@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import SuccessAlert from '../SuccessAlert';
 import ErrorAlert from '../ErrorAlert';
+import { format } from 'date-fns';
 
 export default class IndexProduct extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             products: [],
             activePage: 1,
@@ -66,6 +67,34 @@ export default class IndexProduct extends Component {
 
     }
 
+    sortBy(key) {
+        debugger
+        let arrayCopy = [...this.state.products];
+        const arrInStr = JSON.stringify(arrayCopy);
+        arrayCopy.sort(this.compareByAsc(key));
+        const arrInStr1 = JSON.stringify(arrayCopy);
+        if (arrInStr === arrInStr1) {
+          arrayCopy.sort(this.compareByDesc(key));
+        }
+        this.setState({ products: arrayCopy });
+    }
+
+    compareByAsc(key) {
+        return function (a, b) {
+            if (a[key] < b[key]) return -1;
+            if (a[key] > b[key]) return 1;
+            return 0;
+        };
+    }
+
+    compareByDesc(key) {
+        return function (a, b) {
+            if (a[key] < b[key]) return 1;
+            if (a[key] > b[key]) return -1;
+            return 0;
+        };
+    }
+
     render() {
         return (
             <div>
@@ -80,9 +109,9 @@ export default class IndexProduct extends Component {
                             <th scope="col">#</th>
                             <th scope="col">Nom Produit</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
+                            <th scope="col" onClick={() => this.sortBy('price')}>Prix</th>
+                            <th scope="col">Créé à</th>
+                            <th scope="col">Mis à jour à</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -91,13 +120,12 @@ export default class IndexProduct extends Component {
                             this.state.products.map(product => {
                                 return (
                                     <tr key={product.id}>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{product.id}</th>
                                         <td>{product.name}</td>
                                         <td>{product.description}</td>
                                         <td>{product.price}</td>
-                                        <td>{product.price}</td>
-                                        <td>{product.created_at}</td>
-                                        <td>{product.updated_at}</td>
+                                        <td>{format(new Date(product.created_at), 'yyyy/MM/dd kk:mm:ss')}</td>
+                                        <td>{format(new Date(product.updated_at), 'yyyy/MM/dd kk:mm:ss')}</td>
                                         <td>
                                             <Link to={`/product/edit/${product.id}`} className="btn btn-primary">Edit</Link> &nbsp;
                                             <a href="#" onClick={this.onDelete.bind(this, product.id)} className="btn btn-danger">Delete</a>

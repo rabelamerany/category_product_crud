@@ -25,6 +25,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "date-fns": "^2.16.1",
+        "react-js-pagination": "^3.0.3",
         "react-router-dom": "^5.2.0"
     }
 }

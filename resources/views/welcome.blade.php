@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Php - Coding challenge</title>
+        <title>Coding challenge</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="/css/app.css" rel="stylesheet">
+        <link rel="icon" href="../image/icon.png" type="image/png">
 
     </head>
     <body>
