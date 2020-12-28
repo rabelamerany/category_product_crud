@@ -78,8 +78,9 @@ export default class IndexProduct extends Component {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">product Name</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Nom Produit</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Prix</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
                             <th scope="col">Action</th>
@@ -92,7 +93,9 @@ export default class IndexProduct extends Component {
                                     <tr key={product.id}>
                                         <th scope="row">1</th>
                                         <td>{product.name}</td>
-                                        <td>{product.active == 1 ? ("Active") : ("InActive")}</td>
+                                        <td>{product.description}</td>
+                                        <td>{product.price}</td>
+                                        <td>{product.price}</td>
                                         <td>{product.created_at}</td>
                                         <td>{product.updated_at}</td>
                                         <td>

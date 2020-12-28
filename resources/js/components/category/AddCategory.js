@@ -39,12 +39,12 @@ export default class AddCategory extends Component {
         return (
             <div>
                 <hr />
-                {this.state.alert_message == "success" ? <SuccessAlert message={"Category added successfully."} /> : null}
-                {this.state.alert_message == "error" ? <ErrorAlert message={"Error occured while adding the category."} /> : null}
+                {this.state.alert_message == "success" ? <SuccessAlert message={"Catégorie ajoutée avec succès."} /> : null}
+                {this.state.alert_message == "error" ? <ErrorAlert message={"Une erreur s'est produite lors de l'ajout de la catégorie."} /> : null}
 
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label htmlFor="category_name">Category Name</label>
+                        <label htmlFor="category_name">Nom</label>
                         <input type="text"
                             className="form-control"
                             id="category_name"
@@ -52,7 +52,7 @@ export default class AddCategory extends Component {
                             onChange={this.onChangeCategoryName}
                             placeholder="Enter category" />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Enregistrer</button>
                 </form>
             </div>
         );

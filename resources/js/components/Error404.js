@@ -8,7 +8,8 @@ export default class Footer extends Component {
                 <br />
                 <br />
                 <div className="alert alert-danger">
-                    404 Page Not Found. <Link to="/" className="alert-link">Back to home </Link>
+                    404 Page non trouvée. 
+                    <Link to="/" className="alert-link">Retour à Tableau de bord </Link>
                 </div>
             </div>
         );
