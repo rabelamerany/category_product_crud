@@ -71699,22 +71699,12 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
       reader.readAsDataURL(file);
     }
   }, {
-    key: "fileUpload",
-    value: function fileUpload(image) {
-      var url = 'http://localhost:8000/api/fileupload';
-      var formData = {
-        file: this.state.image
-      };
-      return post(url, formData).then(function (response) {
-        return console.log(response);
-      });
-    }
-  }, {
     key: "onSubmit",
     value: function onSubmit(e) {
       var _this3 = this;
 
       e.preventDefault();
+      debugger;
       var product = {
         name: this.state.name,
         description: this.state.description,

@@ -41,11 +41,10 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        if($request->get('file'))
+        if($request->image)
         {
-            $image = $request->get('file');
+            $image = $request->image;
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-            \Image::make($request->get('file'))->save(public_path('images/').$name);
         }
         $product->image = $name;
         $product->category_id = 1;

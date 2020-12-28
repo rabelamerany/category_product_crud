@@ -56,13 +56,6 @@ export default class IndexProduct extends Component {
         reader.readAsDataURL(file);
     }
 
-    fileUpload(image) {
-        const url = 'http://localhost:8000/api/fileupload';
-        const formData = { file: this.state.image }
-        return post(url, formData)
-            .then(response => console.log(response))
-    }
-
     onSubmit(e) {
         e.preventDefault();
         const product = {
