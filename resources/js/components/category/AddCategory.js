@@ -87,7 +87,7 @@ export default class AddCategory extends Component {
                         </div>
                          */
                     }
-                    <button type="submit" className="btn btn-primary">Enregistrer</button>
+                    <button type="submit" className="btn btn-success">Enregistrer</button>
                 </form>
             </div>
         );

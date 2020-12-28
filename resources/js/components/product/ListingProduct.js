@@ -99,8 +99,8 @@ export default class IndexProduct extends Component {
                                         <td>{product.created_at}</td>
                                         <td>{product.updated_at}</td>
                                         <td>
-                                            <Link to={`/product/edit/${product.id}`}>Edit</Link> |
-                                            <a href="#" onClick={this.onDelete.bind(this, product.id)}>Delete</a>
+                                            <Link to={`/product/edit/${product.id}`} className="btn btn-primary">Edit</Link> &nbsp;
+                                            <a href="#" onClick={this.onDelete.bind(this, product.id)} className="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 )

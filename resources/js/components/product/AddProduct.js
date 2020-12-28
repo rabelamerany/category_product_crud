@@ -157,7 +157,7 @@ export default class IndexProduct extends Component {
                             onChange={this.onChangeProductImage}
                             accept="image/*" />
                     </div>
-                    <button type="submit" className="btn btn-danger">Enregistrer</button>
+                    <button type="submit" className="btn btn-success">Enregistrer</button>
                 </form>
             </div>
         );

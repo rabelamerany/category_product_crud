@@ -96,8 +96,8 @@ export default class ListingCategory extends Component {
                                         <td>{category.created_at}</td>
                                         <td>{category.updated_at}</td>
                                         <td>
-                                            <Link to={`/category/edit/${category.id}`}>Edit</Link> |
-                                            <a href="#" onClick={this.onDelete.bind(this, category.id)}>Delete</a>
+                                            <Link to={`/category/edit/${category.id}`} className="btn btn-primary">Edit</Link> &nbsp;
+                                            <a href="#" onClick={this.onDelete.bind(this, category.id)} className="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 )
