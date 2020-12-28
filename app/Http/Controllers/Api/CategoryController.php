@@ -39,6 +39,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->category_name;
+        //$category->parent_category = $request->parent_category;
         $category->save();
     }
 

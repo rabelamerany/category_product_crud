@@ -11,8 +11,19 @@ export default class AddCategory extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             category_name: '',
+            parent_category: '',
+            categories: [],
             alert_message: ''
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://127.0.0.1:8000/api/category')
+            .then(response => {
+                this.setState({
+                    categories: response.data.data,
+                });
+            });
     }
 
     onChangeCategoryName(e) {
@@ -21,10 +32,18 @@ export default class AddCategory extends Component {
         });
     }
 
+    onChangeParentCategory(e) {
+        this.setState({
+            parent_category: e.target.value
+        });
+    }
+
     onSubmit(e) {
         e.preventDefault();
+        debugger
         const category = {
-            category_name: this.state.category_name
+            category_name: this.state.category_name,
+            parent_category: this.state.parent_category
         }
 
         axios.post('http://127.0.0.1:8000/api/category/store', category)
@@ -50,8 +69,24 @@ export default class AddCategory extends Component {
                             id="category_name"
                             value={this.state.category_name}
                             onChange={this.onChangeCategoryName}
-                            placeholder="Enter category" />
-                    </div>
+                            placeholder="Entrez la catégorie" />
+                    </div>{
+                        /*
+                        <div className="form-group form-select">
+                            <label htmlFor="category_name">Catégorie Parentale</label>
+                            <select className="form-control" onChange={this.onChangeCategoryParent}>
+                                <option defaultValue>Open this select menu</option>
+                                {
+                                    this.state.categories.map(category => {
+                                        return (
+                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                         */
+                    }
                     <button type="submit" className="btn btn-primary">Enregistrer</button>
                 </form>
             </div>

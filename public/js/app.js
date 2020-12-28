@@ -71645,21 +71645,44 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
     _this.onChangeProductPrice = _this.onChangeProductPrice.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     _this.onChangeProductImage = _this.onChangeProductImage.bind(_assertThisInitialized(_this));
+    _this.onChangeCategoryName = _this.onChangeCategoryName.bind(_assertThisInitialized(_this));
     _this.state = {
       name: '',
       description: '',
       price: '',
       image: '',
-      alert_message: ''
+      alert_message: '',
+      categories: [],
+      category_id: '',
+      fields: {},
+      errors: {}
     };
     return _this;
   }
 
   _createClass(IndexProduct, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/category').then(function (response) {
+        _this2.setState({
+          categories: response.data.data
+        });
+      });
+    }
+  }, {
     key: "onChangeProductName",
     value: function onChangeProductName(e) {
       this.setState({
         name: e.target.value
+      });
+    }
+  }, {
+    key: "onChangeCategoryName",
+    value: function onChangeCategoryName(e) {
+      this.setState({
+        category_id: e.target.value
       });
     }
   }, {
@@ -71686,12 +71709,12 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
   }, {
     key: "createImage",
     value: function createImage(file) {
-      var _this2 = this;
+      var _this3 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this2.setState({
+        _this3.setState({
           image: e.target.result
         });
       };
@@ -71701,22 +71724,22 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
   }, {
     key: "onSubmit",
     value: function onSubmit(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
-      debugger;
       var product = {
         name: this.state.name,
         description: this.state.description,
         price: this.state.price,
-        image: this.state.image
+        image: this.state.image,
+        category_id: this.state.category_id
       };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/product/store', product).then(function (res) {
-        _this3.setState({
+        _this4.setState({
           alert_message: "success"
         });
       })["catch"](function (error) {
-        _this3.setState({
+        _this4.setState({
           alert_message: "error"
         });
       });
@@ -71741,7 +71764,11 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
         value: this.state.name,
         onChange: this.onChangeProductName,
         placeholder: "Entrez le produit"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: {
+          color: "red"
+        }
+      }, this.state.errors["email"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "description"
@@ -71769,6 +71796,20 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
         onChange: this.onChangeProductPrice,
         placeholder: "Entrez le prix"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group form-select"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "category_name"
+      }, "Categorie:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        onChange: this.onChangeCategoryName
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        defaultValue: true
+      }, "Open this select menu"), this.state.categories.map(function (category) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: category.id,
+          value: category.id
+        }, category.name);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "file"
@@ -71779,7 +71820,7 @@ var IndexProduct = /*#__PURE__*/function (_Component) {
         accept: "image/*"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        className: "btn btn-primary"
+        className: "btn btn-danger"
       }, "Enregistrer")));
     }
   }]);
@@ -72252,12 +72293,25 @@ var AddCategory = /*#__PURE__*/function (_Component) {
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     _this.state = {
       category_name: '',
+      parent_category: '',
+      categories: [],
       alert_message: ''
     };
     return _this;
   }
 
   _createClass(AddCategory, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/category').then(function (response) {
+        _this2.setState({
+          categories: response.data.data
+        });
+      });
+    }
+  }, {
     key: "onChangeCategoryName",
     value: function onChangeCategoryName(e) {
       this.setState({
@@ -72265,20 +72319,29 @@ var AddCategory = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "onChangeParentCategory",
+    value: function onChangeParentCategory(e) {
+      this.setState({
+        parent_category: e.target.value
+      });
+    }
+  }, {
     key: "onSubmit",
     value: function onSubmit(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       e.preventDefault();
+      debugger;
       var category = {
-        category_name: this.state.category_name
+        category_name: this.state.category_name,
+        parent_category: this.state.parent_category
       };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/category/store', category).then(function (res) {
-        _this2.setState({
+        _this3.setState({
           alert_message: "success"
         });
       })["catch"](function (error) {
-        _this2.setState({
+        _this3.setState({
           alert_message: "error"
         });
       });
@@ -72302,7 +72365,7 @@ var AddCategory = /*#__PURE__*/function (_Component) {
         id: "category_name",
         value: this.state.category_name,
         onChange: this.onChangeCategoryName,
-        placeholder: "Enter category"
+        placeholder: "Entrez la cat\xE9gorie"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"

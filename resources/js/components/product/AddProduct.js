@@ -12,18 +12,38 @@ export default class IndexProduct extends Component {
         this.onChangeProductPrice = this.onChangeProductPrice.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeProductImage = this.onChangeProductImage.bind(this)
+        this.onChangeCategoryName = this.onChangeCategoryName.bind(this)
         this.state = {
             name: '',
             description: '',
             price: '',
             image: '',
-            alert_message: ''
+            alert_message: '',
+            categories: [],
+            category_id: '',
+            fields: {},
+            errors: {}
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://127.0.0.1:8000/api/category')
+            .then(response => {
+                this.setState({
+                    categories: response.data.data,
+                });
+            });
     }
 
     onChangeProductName(e) {
         this.setState({
             name: e.target.value
+        });
+    }
+
+    onChangeCategoryName(e) {
+        this.setState({
+            category_id: e.target.value
         });
     }
 
@@ -63,6 +83,7 @@ export default class IndexProduct extends Component {
             description: this.state.description,
             price: this.state.price,
             image: this.state.image,
+            category_id: this.state.category_id,
         }
 
         axios.post('http://127.0.0.1:8000/api/product/store', product)
@@ -89,6 +110,7 @@ export default class IndexProduct extends Component {
                             value={this.state.name}
                             onChange={this.onChangeProductName}
                             placeholder="Entrez le produit" />
+                        <span style={{ color: "red" }}>{this.state.errors["email"]}</span>
                     </div>
                     <div className="form-group">
                         <label htmlFor="description">Description</label>
@@ -107,12 +129,25 @@ export default class IndexProduct extends Component {
                             id="price"
                             onKeyPress={(event) => {
                                 if (!/[0-9]/.test(event.key)) {
-                                  event.preventDefault();
+                                    event.preventDefault();
                                 }
                             }}
                             value={this.state.price}
                             onChange={this.onChangeProductPrice}
                             placeholder="Entrez le prix" />
+                    </div>
+                    <div className="form-group form-select">
+                        <label htmlFor="category_name">Categorie:</label>
+                        <select className="form-control" onChange={this.onChangeCategoryName}>
+                            <option defaultValue>Open this select menu</option>
+                            {
+                                this.state.categories.map(category => {
+                                    return (
+                                        <option key={category.id} value={category.id}>{category.name}</option>
+                                    )
+                                })
+                            }
+                        </select>
                     </div>
                     <div className="form-group">
                         <h3><label htmlFor="file">Image Upload:</label></h3>
@@ -120,9 +155,9 @@ export default class IndexProduct extends Component {
                             type="file"
                             title="Choose File” and “No file Chosen"
                             onChange={this.onChangeProductImage}
-                            accept="image/*"/>
+                            accept="image/*" />
                     </div>
-                    <button type="submit" className="btn btn-primary">Enregistrer</button>
+                    <button type="submit" className="btn btn-danger">Enregistrer</button>
                 </form>
             </div>
         );

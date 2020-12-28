@@ -47,7 +47,7 @@ class ProductController extends Controller
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
         }
         $product->image = $name;
-        $product->category_id = 1;
+        $product->category_id = $request->category_id;
         $product->save();
     }
 
