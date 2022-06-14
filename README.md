@@ -71,7 +71,7 @@ You can instruct your audience on installing and setting up your app
    php artisan serve
    ```
 
-5. Application punning
+5. Application running
    ```localhost
    Go to link localhost:8000
    ```
