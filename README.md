@@ -37,7 +37,7 @@ This is an example of how to list things you need to use the software and how to
   
 * Install composer
   ```sh
-  [https://getcomposer.org/Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)
+  https://getcomposer.org/Composer-Setup.exe
   ```
   
 ### Installation
@@ -46,7 +46,7 @@ You can instruct your audience on installing and setting up your app
 
 1. Clone the repo
    ```sh
-   git clone [https://github.com/RababElAmerany94/category_product_crud](https://github.com/RababElAmerany94/category_product_crud)
+   git clone https://github.com/RababElAmerany94/category_product_crud
    ```
 3. Install depedencies
    ```sh
